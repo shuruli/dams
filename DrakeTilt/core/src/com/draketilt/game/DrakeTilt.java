@@ -40,7 +40,7 @@ public class DrakeTilt extends ApplicationAdapter {
         pixmapBucket.setColor( 0, 1, 0, 0.75f );
 
         dropImage = new Texture(pixmap);
-        bucketImage = new Texture(pixmapBucket);
+        bucketImage = new Texture("DrakeAlive.png");
 
         bucket = new Rectangle();
         bucket.x = 800 / 2 - 64 / 2;
