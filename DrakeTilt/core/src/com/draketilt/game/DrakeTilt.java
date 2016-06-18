@@ -38,7 +38,6 @@ public class DrakeTilt extends ApplicationAdapter {
 
         Pixmap pixmapBucket = new Pixmap( 256, 256, Pixmap.Format.RGB888 );
         pixmapBucket.setColor( 0, 1, 0, 0.75f );
-        pixmapBucket.fillCircle( 32, 32, 32 );
 
         dropImage = new Texture(pixmap);
         bucketImage = new Texture(pixmapBucket);
@@ -89,6 +88,9 @@ public class DrakeTilt extends ApplicationAdapter {
             Rectangle raindrop = iter.next();
             raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
             if(raindrop.y + 64 < 0) iter.remove();
+            if(raindrop.overlaps(bucket)) {
+                iter.remove();
+            }
         }
 
     }
