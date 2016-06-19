@@ -24,7 +24,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(DrakeTilt game){
         this.game = game;
         state = GAME_READY;
-        guiCam = new OrthographicCamera(800, 480);
+        guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
         world = new World();
         renderer = new WorldRenderer(game.batcher, world);
 

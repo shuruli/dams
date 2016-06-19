@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class Assets {
     public static Texture background;
     public static Texture drake;
-    public static Texture mainMenu;
+    public static Texture play;
     public static BitmapFont font;
 
 
@@ -21,7 +21,7 @@ public class Assets {
 
     public static void load(){
         background = loadTexture("background.png");
-        mainMenu = new Texture("play.png");
+        play = new Texture("play.png");
         drake = new Texture("drake.png");
         font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
     }

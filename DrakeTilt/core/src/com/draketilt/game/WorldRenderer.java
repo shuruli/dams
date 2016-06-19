@@ -13,7 +13,6 @@ public class WorldRenderer {
     World world;
     OrthographicCamera cam;
     SpriteBatch batch;
-    Rectangle bucket = new Rectangle();
 
     public WorldRenderer (SpriteBatch batch, World world) {
         this.world = world;
@@ -43,6 +42,5 @@ public class WorldRenderer {
     public void renderDrake(){
         batch.draw(Assets.drake, world.drake.position.x, world.drake.position.y);
     }
-
 
 }
