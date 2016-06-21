@@ -10,6 +10,7 @@ public class Drops extends GameObject {
     float RANDOM_VELOCITY = MathUtils.random(100, 300);
     public Drops(float x, float y){
         super(x, y, SIZE, SIZE);
+        bounds.x = position.x - bounds.width;
     }
 
     public void update(float deltaTime){

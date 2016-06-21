@@ -23,10 +23,12 @@ public class MainMenuScreen extends ScreenAdapter{
     }
 
     public void update(){
+        Assets.hotlinebling.play();
         if (Gdx.input.justTouched()) {
             guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),0));
 
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
+                Assets.hotlinebling.pause();
                 game.setScreen(new GameScreen(game));
                 return;
             }
@@ -35,13 +37,12 @@ public class MainMenuScreen extends ScreenAdapter{
 
     public void draw(){
         GL20 gl = Gdx.gl;
-        gl.glClearColor(0, 0, 0, 0);
+        gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         guiCam.update();
         game.batcher.setProjectionMatrix(guiCam.combined);
-        game.batcher.disableBlending();
         game.batcher.begin();
-        // more stuff
+        game.batcher.draw(Assets.backgroundRegion, -Settings.GAME_WIDTH / 2, -Settings.GAME_HEIGHT / 2, 800, 480);
         game.batcher.end();
 
         game.batcher.enableBlending();

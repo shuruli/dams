@@ -14,8 +14,10 @@ public class World {
     public int WORLD_GAME_RUNNING = 0;
     public int WORLD_GAME_OVER = 1;
     public int state;
+    public float difficulty = 0f;
 
     public void update (float deltaTime, float accelX, float accelY){
+        difficulty += deltaTime;
         updateDrake(deltaTime, accelX, accelY);
         if(drake.state == drake.DRAKE_ALIVE) {
             updateDrops(deltaTime);
@@ -44,7 +46,7 @@ public class World {
     }
 
     private void addDrops (){
-        if (MathUtils.random(200) == 1) {
+        if (MathUtils.random(1000.0f) < difficulty) {
             Drops drop = new Drops(MathUtils.random(-Settings.GAME_WIDTH / 2f, Settings.GAME_WIDTH / 2f), Settings.GAME_HEIGHT / 1.8f);
             drops.add(drop);
         }

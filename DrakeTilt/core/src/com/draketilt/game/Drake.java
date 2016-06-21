@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
  * Created by davidchang on 6/18/16.
  */
 public class Drake extends DynamicGameObject {
-    public static final float DRAKE_MOVE_VELOCITY = 100;
+    public static final float DRAKE_MOVE_VELOCITY = 150;
     public static final float DRAKE_WIDTH = Assets.drakeAlive.getWidth();
     public static final float DRAKE_HEIGHT = Assets.drakeAlive.getWidth();
     public static final int DRAKE_ALIVE = 0;

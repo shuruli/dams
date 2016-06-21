@@ -33,11 +33,13 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void update (float deltaTime){
+        Assets.onedance.play();
         switch(state){
             case GAME_RUNNING:
                 updateRunning(deltaTime);
                 break;
             case GAME_OVER:
+                Assets.onedance.pause();
                 updateGameOver();
                 break;
         }
@@ -55,14 +57,20 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateGameOver(){
+        Assets.backtoback.play();
         if (Gdx.input.justTouched()) {
+            Assets.backtoback.pause();
             game.setScreen(new MainMenuScreen(game));
         }
     }
 
     public void draw(){
         GL20 gl = Gdx.gl;
+        gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batcher.begin();
+        game.batcher.draw(Assets.backgroundRegion, -Settings.GAME_WIDTH / 2, -Settings.GAME_HEIGHT / 2, 800, 480);
+        game.batcher.end();
         renderer.render();
         guiCam.update();
         game.batcher.setProjectionMatrix(guiCam.combined);
@@ -86,12 +94,12 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void presentRunning(){
-        Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, -Settings.GAME_HEIGHT / 2 + 25);
+        Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, Settings.GAME_HEIGHT / 2 - 25);
     }
 
     public void presentOver(){
         Assets.font.draw(game.batcher, "GAME OVER", -50, 0);
-        Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, -Settings.GAME_HEIGHT / 2 + 25);
+        Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, Settings.GAME_HEIGHT / 2 - 25);
     }
 
     @Override
