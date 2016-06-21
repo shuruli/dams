@@ -1,6 +1,8 @@
 package com.draketilt.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -36,11 +38,28 @@ public class WorldRenderer {
         batch.enableBlending();
         batch.begin();
         renderDrake();
+        renderDrops();
         batch.end();
     }
 
     public void renderDrake(){
-        batch.draw(Assets.drake, world.drake.position.x, world.drake.position.y);
+        switch (world.drake.state) {
+            case Drake.DRAKE_ALIVE:
+                batch.draw(Assets.drakeAlive, world.drake.position.x, world.drake.position.y);
+                break;
+            case Drake.DRAKE_DEAD:
+                batch.draw(Assets.drakeDead, world.drake.position.x, world.drake.position.y);
+                break;
+            default:
+        }
+    }
+
+    public void renderDrops(){
+        for(int i = 0; i < world.drops.size(); i++){
+            Drops drop = world.drops.get(i);
+            batch.draw(Assets.drop, drop.position.x, drop.position.y);
+        }
+
     }
 
 }
