@@ -98,7 +98,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void presentOver(){
-        Assets.font.draw(game.batcher, "GAME OVER", -50, 0);
+        Assets.font.draw(game.batcher, Settings.GAME_OVER, -50, 0);
         Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, Settings.GAME_HEIGHT / 2 - 25);
     }
 

@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class Assets {
     public static Texture background;
     public static TextureRegion backgroundRegion;
+    public static TextureRegion mainMenuBackgroundRegion;
+    public static Texture mainMenuBackground;
     public static Texture drakeAlive;
     public static Texture drakeDead;
     public static Texture play;
@@ -30,7 +32,10 @@ public class Assets {
 
     public static void load(){
         background = loadTexture("background.png");
+        mainMenuBackground = loadTexture("mainMenuBackground.png");
         backgroundRegion = new TextureRegion(background, 0, 0, 800, 480);
+        mainMenuBackgroundRegion = new TextureRegion(mainMenuBackground, 0, 0, 800, 480);
+
         play = loadTexture("play.png");
         drakeAlive = loadTexture("drakealive.png");
         drakeDead = loadTexture("drakedead.png");
@@ -38,12 +43,17 @@ public class Assets {
         font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
         hotlinebling = Gdx.audio.newMusic(Gdx.files.internal("hotlinebling.mp3"));
         hotlinebling.setLooping(true);
-        hotlinebling.setVolume(0.5f);
         onedance = Gdx.audio.newMusic(Gdx.files.internal("onedance.mp3"));
-        hotlinebling.setLooping(true);
-        hotlinebling.setVolume(0.5f);
+        onedance.setLooping(true);
         backtoback = Gdx.audio.newMusic(Gdx.files.internal("backtoback.mp3"));
-        backtoback.setVolume(0.5f);
         backtoback.setLooping(false);
+
+        setVolume();
+    }
+
+    public static void setVolume(){
+        hotlinebling.setVolume(Settings.GAME_VOLUME);
+        backtoback.setVolume(Settings.GAME_VOLUME);
+        onedance.setVolume(Settings.GAME_VOLUME);
     }
 }
