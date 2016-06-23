@@ -19,6 +19,7 @@ public class Assets {
     public static Texture drakeDead;
     public static Texture play;
     public static Texture drop;
+    public static Texture sound;
     public static BitmapFont font;
 
     public static Music hotlinebling;
@@ -39,6 +40,7 @@ public class Assets {
         play = loadTexture("play.png");
         drakeAlive = loadTexture("drakealive.png");
         drakeDead = loadTexture("drakedead.png");
+        sound = loadTexture("soundOn.png");
         drop = loadTexture("cd.png");
         font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
         hotlinebling = Gdx.audio.newMusic(Gdx.files.internal("hotlinebling.mp3"));

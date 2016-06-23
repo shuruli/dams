@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 public class MainMenuScreen extends ScreenAdapter{
     DrakeTilt game;
     OrthographicCamera guiCam;
-    float initX, initY, initWidth, initHeight, heightPerLabel;
+    float initX, initY, initWidth, initHeight, heightPerLabel, initSoundX, initSoundY, initSoundWidth, initSoundHeight;
     Rectangle playBounds, leaderboardBounds, soundBounds, helpBounds;
     Vector3 touchPoint = new Vector3();
 
@@ -25,16 +25,21 @@ public class MainMenuScreen extends ScreenAdapter{
         initY = -Settings.GAME_HEIGHT/2 + Settings.GAME_HEIGHT/3;
         initWidth = Settings.GAME_WIDTH/4;
         initHeight = Settings.GAME_HEIGHT/3;
-
         heightPerLabel = initHeight/4;
+
+        initSoundX = Settings.GAME_WIDTH/2 - Settings.GAME_WIDTH/14;
+        initSoundY = Settings.GAME_HEIGHT/2 - Settings.GAME_HEIGHT/8;
+        initSoundWidth = Settings.GAME_WIDTH/14;
+        initSoundHeight = Settings.GAME_WIDTH/14;
 
         this.game = game;
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
+
         Gdx.app.log("MainMenuScreen.java/constructor()", "initX : "+ initX + " initY: "+ initY + " initWidth: "+initWidth+" initHeight: "+initHeight+" heightPerLabel: "+ heightPerLabel);
-        playBounds = new Rectangle(initX, initY + 3*heightPerLabel, initWidth, heightPerLabel/2);
-        leaderboardBounds = new Rectangle(initX, initY + 2*heightPerLabel, initWidth, heightPerLabel/2);
-        soundBounds = new Rectangle(initX, initY + heightPerLabel, initWidth, heightPerLabel/2);
+        playBounds = new Rectangle(initX, initY + 2*heightPerLabel, initWidth, heightPerLabel/2);
+        leaderboardBounds = new Rectangle(initX, initY + 1*heightPerLabel, initWidth, heightPerLabel/2);
         helpBounds = new Rectangle(initX, initY, initWidth, heightPerLabel/2);
+        soundBounds = new Rectangle(initSoundX, initSoundY, initSoundWidth, initSoundHeight);
 
     }
 
@@ -70,12 +75,12 @@ public class MainMenuScreen extends ScreenAdapter{
 
         game.batcher.begin();
         game.batcher.draw(Assets.mainMenuBackgroundRegion, -Settings.GAME_WIDTH/2, -Settings.GAME_HEIGHT/2, 800, 480);
+        game.batcher.draw(Assets.sound, initSoundX, initSoundY, initSoundWidth, initSoundHeight);
 
         Assets.font.setColor(Color.BLACK);
         Assets.font.draw(game.batcher, Settings.PLAY, initX, initY + 3*heightPerLabel + heightPerLabel/2);
         Assets.font.draw(game.batcher, Settings.LEADERBOARDS, initX, initY + 2*heightPerLabel+ heightPerLabel/2);
-        Assets.font.draw(game.batcher, Settings.TOGGLE_SOUND, initX, initY + heightPerLabel+ heightPerLabel/2);
-        Assets.font.draw(game.batcher, Settings.HELP, initX, initY+ heightPerLabel/2);
+        Assets.font.draw(game.batcher, Settings.HELP, initX, initY+ heightPerLabel+ heightPerLabel/2);
         game.batcher.end();
     }
 
