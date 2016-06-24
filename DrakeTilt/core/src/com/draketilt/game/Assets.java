@@ -49,13 +49,7 @@ public class Assets {
         onedance.setLooping(true);
         backtoback = Gdx.audio.newMusic(Gdx.files.internal("backtoback.mp3"));
         backtoback.setLooping(false);
-
-        setVolume();
+        if (Settings.TOGGLE_SOUND) { hotlinebling.play(); }
     }
 
-    public static void setVolume(){
-        hotlinebling.setVolume(Settings.GAME_VOLUME);
-        backtoback.setVolume(Settings.GAME_VOLUME);
-        onedance.setVolume(Settings.GAME_VOLUME);
-    }
 }

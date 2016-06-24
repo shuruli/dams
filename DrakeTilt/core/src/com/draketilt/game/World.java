@@ -30,7 +30,7 @@ public class World {
     }
 
     private void updateDrake (float deltaTime, float accelX, float accelY){
-        drake.velocity.x = -accelX * Drake.DRAKE_MOVE_VELOCITY;
+        drake.velocity.x = accelX * Drake.DRAKE_MOVE_VELOCITY;
         drake.velocity.y = -accelY * Drake.DRAKE_MOVE_VELOCITY;
         drake.update(deltaTime);
     }

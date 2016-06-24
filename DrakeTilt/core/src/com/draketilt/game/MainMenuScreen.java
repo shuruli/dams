@@ -35,7 +35,6 @@ public class MainMenuScreen extends ScreenAdapter{
         this.game = game;
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
 
-        Gdx.app.log("MainMenuScreen.java/constructor()", "initX : "+ initX + " initY: "+ initY + " initWidth: "+initWidth+" initHeight: "+initHeight+" heightPerLabel: "+ heightPerLabel);
         playBounds = new Rectangle(initX, initY + 2*heightPerLabel, initWidth, heightPerLabel/2);
         leaderboardBounds = new Rectangle(initX, initY + 1*heightPerLabel, initWidth, heightPerLabel/2);
         helpBounds = new Rectangle(initX, initY, initWidth, heightPerLabel/2);
@@ -44,19 +43,27 @@ public class MainMenuScreen extends ScreenAdapter{
     }
 
     public void update(){
-        Assets.hotlinebling.play();
+        if (Settings.TOGGLE_SOUND){
+            Assets.hotlinebling.play();
+        }
         if (Gdx.input.justTouched()) {
             guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),0));
             Gdx.app.log("MainMenuScreen.java/update()", touchPoint.x + " " + touchPoint.y);
+            Gdx.app.log("Toggle sound", " " + Settings.TOGGLE_SOUND);
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
                 Assets.hotlinebling.pause();
                 game.setScreen(new GameScreen(game));
                 return;
             } else if (soundBounds.contains(touchPoint.x, touchPoint.y)){
-                Gdx.app.log("MainMenuScree.java/update()", "Muting Sound");
-                Settings.GAME_VOLUME = 0f;
-                Assets.setVolume();
+                if (Settings.TOGGLE_SOUND){
+                    Assets.hotlinebling.pause();
+                }
+                else if (!Settings.TOGGLE_SOUND){
+                    Assets.hotlinebling.play();
+                }
+                Settings.TOGGLE_SOUND = !Settings.TOGGLE_SOUND;
             }
+
         }
     }
 

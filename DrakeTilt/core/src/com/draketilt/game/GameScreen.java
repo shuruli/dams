@@ -33,7 +33,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void update (float deltaTime){
-        Assets.onedance.play();
+        if (Settings.TOGGLE_SOUND) {
+            Assets.onedance.play();
+        }
         switch(state){
             case GAME_RUNNING:
                 updateRunning(deltaTime);
@@ -47,7 +49,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateRunning (float deltaTime){
-        world.update(deltaTime, Gdx.input.getAccelerometerX(), Gdx.input.getAccelerometerY());
+        world.update(deltaTime, Gdx.input.getAccelerometerY(), Gdx.input.getAccelerometerX());
         score += 1;
         scoreString = "Score: " + Integer.toString(score);
         if (world.state == world.WORLD_GAME_OVER){
@@ -57,7 +59,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void updateGameOver(){
-        Assets.backtoback.play();
+        if(Settings.TOGGLE_SOUND) {
+            Assets.backtoback.play();
+        }
         if (Gdx.input.justTouched()) {
             Assets.backtoback.pause();
             game.setScreen(new MainMenuScreen(game));
