@@ -20,6 +20,10 @@ public class Assets {
     public static Texture play;
     public static Texture drop;
     public static Texture sound;
+    public static Texture helpScreen1;
+    public static Texture helpScreen2;
+    public static Texture helpScreen3;
+    public static Texture helpScreen4;
     public static BitmapFont font;
 
     public static Music hotlinebling;
@@ -34,6 +38,10 @@ public class Assets {
     public static void load(){
         background = loadTexture("background.png");
         mainMenuBackground = loadTexture("mainMenuBackground.png");
+        helpScreen1 = loadTexture("helpScreen1.jpg");
+        helpScreen2 = loadTexture("helpScreen2.jpg");
+        helpScreen3 = loadTexture("helpScreen3.jpg");
+        helpScreen4 = loadTexture("helpScreen4.jpg");
         backgroundRegion = new TextureRegion(background, 0, 0, 800, 480);
         mainMenuBackgroundRegion = new TextureRegion(mainMenuBackground, 0, 0, 800, 480);
 

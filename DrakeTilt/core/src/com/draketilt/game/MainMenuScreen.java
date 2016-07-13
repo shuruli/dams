@@ -63,6 +63,10 @@ public class MainMenuScreen extends ScreenAdapter{
                 }
                 Settings.TOGGLE_SOUND = !Settings.TOGGLE_SOUND;
             }
+            else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
+                game.setScreen(new HelpScreen(game));
+                return;
+            }
 
         }
     }
