@@ -12,4 +12,5 @@ class Score {
 
 public class HighScores {
     ArrayList<Score> scores;
+    boolean isFull;
 }

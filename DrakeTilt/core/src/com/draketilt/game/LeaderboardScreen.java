@@ -42,12 +42,24 @@ public class LeaderboardScreen extends ScreenAdapter {
         heightPerLabel = Settings.GAME_HEIGHT/12;
 
         this.game = game;
+
+        if (Gdx.app.getPreferences("MyPreferences") == null){
+            return;
+        }
+
         this.preferences = Gdx.app.getPreferences("MyPreferences");
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
 
     }
 
     public void update(){
+        Gdx.input.setCatchBackKey(true);
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new MainMenuScreen(game));
+            Gdx.input.setCatchBackKey(false);
+            return;
+        }
+
         if (Settings.TOGGLE_SOUND){
             Assets.hotlinebling.play();
         }
@@ -71,9 +83,21 @@ public class LeaderboardScreen extends ScreenAdapter {
         scoreList.clear();
         dateList.clear();
 
-        for (int i =0; i < 5; i++){
-            scoreList.add(highScores.scores.get(i).score);
-            dateList.add(highScores.scores.get(i).date);
+        if (highScores == null){
+            for (int i =0; i < 5; i++){
+                scoreList.add(0);
+                dateList.add("");
+            }
+        } else if (highScores.scores == null){
+            for (int i =0; i < 5; i++){
+                scoreList.add(0);
+                dateList.add("");
+            }
+        } else {
+            for (int i = 0; i < 5; i++) {
+                scoreList.add(highScores.scores.get(i).score);
+                dateList.add(highScores.scores.get(i).date);
+            }
         }
 
     }
@@ -93,7 +117,7 @@ public class LeaderboardScreen extends ScreenAdapter {
         game.batcher.begin();
         Assets.titleFont.draw(game.batcher, Settings.LEADERBOARDS, initLeaderboardX , initTitleY);
         for (int i = 1; i <= 5; i++){
-            Assets.font.draw(game.batcher, (6 - i)+". "+ scoreList.get(i-1), initLeaderboardX, initLeaderboardY + heightPerLabel*(i-1));
+            Assets.font.draw(game.batcher, (6 - i)+". "+ scoreList.get(5-i), initLeaderboardX, initLeaderboardY + heightPerLabel*(i-1));
         }
         game.batcher.end();
     }
