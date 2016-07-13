@@ -68,6 +68,10 @@ public class MainMenuScreen extends ScreenAdapter{
                 game.setScreen(new LeaderboardScreen(game));
                 return;
             }
+            else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
+                game.setScreen(new HelpScreen(game));
+                return;
+            }
 
         }
     }

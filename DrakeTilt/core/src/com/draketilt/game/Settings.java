@@ -15,5 +15,6 @@ public class Settings {
     public final static String LEADERBOARDS = "LEADERBOARDS";
     public static boolean TOGGLE_SOUND = true;
     public final static String HELP = "HELP";
+    public final static String HELP_NEXT = "Touch To Advance";
 
 }
