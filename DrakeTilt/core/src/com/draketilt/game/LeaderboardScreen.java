@@ -117,7 +117,7 @@ public class LeaderboardScreen extends ScreenAdapter {
         game.batcher.begin();
         Assets.titleFont.draw(game.batcher, Settings.LEADERBOARDS, initLeaderboardX , initTitleY);
         for (int i = 1; i <= 5; i++){
-            Assets.font.draw(game.batcher, (6 - i)+". "+ scoreList.get(5-i), initLeaderboardX, initLeaderboardY + heightPerLabel*(i-1));
+            Assets.font.draw(game.batcher, (6 - i)+". "+ scoreList.get(5-i) + " "+ dateList.get(5 - i), initLeaderboardX, initLeaderboardY + heightPerLabel*(i-1));
         }
         game.batcher.end();
     }
