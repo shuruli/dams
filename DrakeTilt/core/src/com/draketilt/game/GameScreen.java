@@ -1,9 +1,21 @@
 package com.draketilt.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.TimeUtils;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javafx.collections.transformation.SortedList;
 
 /**
  * Created by davidchang on 6/18/16.
@@ -13,15 +25,18 @@ public class GameScreen extends ScreenAdapter {
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
+
     int score = 0;
     public String scoreString = "";
-
     DrakeTilt game;
-
     int state;
+    boolean handledSaveData;
     OrthographicCamera guiCam;
     World world;
     WorldRenderer renderer;
+
+    Preferences preferences;
+    HighScores highScores;
 
     public GameScreen(DrakeTilt game){
         this.game = game;
@@ -29,7 +44,8 @@ public class GameScreen extends ScreenAdapter {
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
         world = new World();
         renderer = new WorldRenderer(game.batcher, world);
-
+        preferences = Gdx.app.getPreferences("MyPreferences");
+        handledSaveData = false;
     }
 
     public void update (float deltaTime){
@@ -68,6 +84,18 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    private List<Score> shiftList(Score score, List<Score> list, int start, int end){
+        List<Score> listToReturn = list;
+        for (int i = end; i >=start; i--){
+            if (i == start){
+                listToReturn.set(i, score);
+            } else {
+                listToReturn.set(i, listToReturn.get(i - 1));
+            }
+        }
+        return listToReturn;
+    }
+
     public void draw(){
         GL20 gl = Gdx.gl;
         gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
@@ -104,6 +132,52 @@ public class GameScreen extends ScreenAdapter {
     public void presentOver(){
         Assets.font.draw(game.batcher, Settings.GAME_OVER, -50, 0);
         Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, Settings.GAME_HEIGHT / 2 - 25);
+
+        if (!handledSaveData) {
+            Date date = new Date(TimeUtils.millis());
+
+            String todaysDate = date.toString();
+            Score scoreObject = new Score();
+
+            scoreObject.date = todaysDate;
+            scoreObject.score = this.score;
+
+            List<Score> listScores = new ArrayList<Score>();
+            Json json = new Json();
+
+            String jsonText = preferences.getString("highScores");
+            highScores = json.fromJson(HighScores.class, jsonText);
+
+            if (highScores == null) {
+                highScores = new HighScores();
+                scoreObject = new Score();
+                scoreObject.score = this.score;
+                scoreObject.date = todaysDate;
+                listScores.add(scoreObject);
+
+                scoreObject = new Score();
+                scoreObject.score = 0;
+                scoreObject.date = "";
+
+                for (int i = 1; i < 5; i++) {
+                    listScores.add(scoreObject);
+                }
+            } else {
+                for (int i = 0; i < listScores.size(); i++) {
+                    if (score > listScores.get(i).score) {
+                        listScores = shiftList(scoreObject, listScores, i, listScores.size() - 1);
+                    }
+                }
+            }
+            highScores.scores = (ArrayList) listScores;
+
+            json.setElementType(HighScores.class, "scores", Score.class);
+            preferences.putString("highScores", json.prettyPrint(highScores));
+            preferences.flush();
+
+            preferences.getString("highScores");
+            handledSaveData = true;
+        }
     }
 
     @Override

@@ -56,6 +56,7 @@ public class World {
         for (int i = 0; i < drops.size(); i++){
             Drops drop = drops.get(i);
             if(drop.bounds.overlaps(drake.bounds)){
+
                 drake.hitCD();
             }
         }

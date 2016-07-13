@@ -21,6 +21,7 @@ public class Assets {
     public static Texture drop;
     public static Texture sound;
     public static BitmapFont font;
+    public static BitmapFont titleFont;
 
     public static Music hotlinebling;
     public static Music onedance;
@@ -43,6 +44,7 @@ public class Assets {
         sound = loadTexture("soundOn.png");
         drop = loadTexture("cd.png");
         font = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
+        titleFont = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font.png"), false);
         hotlinebling = Gdx.audio.newMusic(Gdx.files.internal("hotlinebling.mp3"));
         hotlinebling.setLooping(true);
         onedance = Gdx.audio.newMusic(Gdx.files.internal("onedance.mp3"));

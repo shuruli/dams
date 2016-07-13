@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
  */
 public class Drops extends GameObject {
     public static final float SIZE = 64;
+
     float RANDOM_VELOCITY = MathUtils.random(100, 300);
     public Drops(float x, float y){
         super(x, y, SIZE, SIZE);

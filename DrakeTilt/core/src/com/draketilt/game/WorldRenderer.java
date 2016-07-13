@@ -59,7 +59,6 @@ public class WorldRenderer {
             Drops drop = world.drops.get(i);
             batch.draw(Assets.drop, drop.position.x, drop.position.y);
         }
-
     }
 
 }
