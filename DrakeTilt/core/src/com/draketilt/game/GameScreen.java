@@ -44,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
         world = new World();
         renderer = new WorldRenderer(game.batcher, world);
-        preferences = Gdx.app.getPreferences("MyPreferences");
+        preferences = Gdx.app.getPreferences("DrakeTiltPreferences");
         handledSaveData = false;
     }
 

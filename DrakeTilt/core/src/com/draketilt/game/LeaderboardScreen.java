@@ -43,11 +43,11 @@ public class LeaderboardScreen extends ScreenAdapter {
 
         this.game = game;
 
-        if (Gdx.app.getPreferences("MyPreferences") == null){
+        if (Gdx.app.getPreferences("DrakeTiltPreferences") == null){
             return;
         }
 
-        this.preferences = Gdx.app.getPreferences("MyPreferences");
+        this.preferences = Gdx.app.getPreferences("DrakeTiltPreferences");
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
 
     }
