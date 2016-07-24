@@ -101,6 +101,11 @@ public class LeaderboardScreen extends ScreenAdapter {
                 scoreList.add(0);
                 dateList.add("");
             }
+        } else if (highScores.scores.size() == 0) {
+            for (int i =0; i < 5; i++){
+                scoreList.add(0);
+                dateList.add("");
+            }
         } else {
             for (int i = 0; i < 5; i++) {
                 scoreList.add(highScores.scores.get(i).score);

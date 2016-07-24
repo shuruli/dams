@@ -44,7 +44,6 @@ public class GameScreen extends ScreenAdapter {
         guiCam = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
         world = new World();
         renderer = new WorldRenderer(game.batcher, world);
-        preferences = Gdx.app.getPreferences("DrakeTiltPreferences");
         handledSaveData = false;
     }
 
@@ -134,6 +133,7 @@ public class GameScreen extends ScreenAdapter {
         Assets.font.draw(game.batcher, scoreString, - Settings.GAME_WIDTH / 2 + 20, Settings.GAME_HEIGHT / 2 - 25);
 
         if (!handledSaveData) {
+            preferences = Gdx.app.getPreferences("DrakeTiltPreferences");
             Date date = new Date(TimeUtils.millis());
 
             String todaysDate = date.toString();
