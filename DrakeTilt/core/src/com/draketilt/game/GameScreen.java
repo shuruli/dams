@@ -149,19 +149,17 @@ public class GameScreen extends ScreenAdapter {
             highScores = json.fromJson(HighScores.class, jsonText);
 
             if (highScores != null && highScores.scores != null && highScores.scores.size() != 0) {
-                if (highScores.isFull){
+                if (highScores.scores.get(highScores.scores.size() - 1).score != 0){
                     for (int i = 0; i < highScores.scores.size(); i++) {
                         if (score > highScores.scores.get(i).score) {
                             listScores = shiftList(scoreObject, highScores.scores, i, highScores.scores.size() - 1);
+                            break;
                         }
                     }
                 } else {
                     for (int i = 0; i < highScores.scores.size(); i++) {
                         if (score > 0 && score > highScores.scores.get(i).score) {
                             listScores = shiftList(scoreObject, highScores.scores, i, highScores.scores.size() - 1);
-                            if (i == 4){
-                                highScores.isFull = true;
-                            }
                             break;
                         }
                     }
@@ -171,6 +169,7 @@ public class GameScreen extends ScreenAdapter {
                 scoreObject = new Score();
                 scoreObject.score = this.score;
                 scoreObject.date = todaysDate;
+
                 listScores.add(scoreObject);
 
                 scoreObject = new Score();
@@ -181,15 +180,11 @@ public class GameScreen extends ScreenAdapter {
                     listScores.add(scoreObject);
                 }
 
-                highScores.isFull = false;
             }
             highScores.scores = (ArrayList) listScores;
-
             json.setElementType(HighScores.class, "scores", Score.class);
             preferences.putString("highScores", json.prettyPrint(highScores));
             preferences.flush();
-
-            preferences.getString("highScores");
             handledSaveData = true;
         }
     }
