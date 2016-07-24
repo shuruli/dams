@@ -49,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void update (float deltaTime){
+        score = world.score;
         if (Settings.TOGGLE_SOUND) {
             Assets.onedance.play();
         }
@@ -66,7 +67,6 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateRunning (float deltaTime){
         world.update(deltaTime, Gdx.input.getAccelerometerY(), Gdx.input.getAccelerometerX());
-        score += 1;
         scoreString = "Score: " + Integer.toString(score);
         if (world.state == world.WORLD_GAME_OVER){
             state = GAME_OVER;

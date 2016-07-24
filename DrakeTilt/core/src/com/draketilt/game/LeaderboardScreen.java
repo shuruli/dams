@@ -28,6 +28,9 @@ public class LeaderboardScreen extends ScreenAdapter {
 
     float initLeaderboardX, initLeaderboardY, heightPerLabel;
 
+    Rectangle backBounds = new Rectangle(350 - Assets.backButton.getWidth()
+            / 2, -300 + Assets.backButton.getWidth() / 2, Assets.backButton.getWidth(), Assets.backButton.getHeight());
+
     HighScores highScores;
     Preferences preferences;
     List<Integer> scoreList = new ArrayList<Integer>(5);
@@ -53,7 +56,13 @@ public class LeaderboardScreen extends ScreenAdapter {
     }
 
     public void update(){
+        guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),0));
         Gdx.input.setCatchBackKey(true);
+        if (backBounds.contains(touchPoint.x, touchPoint.y)) {
+            Assets.hotlinebling.pause();
+            game.setScreen(new MainMenuScreen(game));
+            return;
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
             game.setScreen(new MainMenuScreen(game));
             Gdx.input.setCatchBackKey(false);
@@ -65,8 +74,7 @@ public class LeaderboardScreen extends ScreenAdapter {
         }
         if (Gdx.input.justTouched()) {
             guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),0));
-            Gdx.app.log("MainMenuScreen.java/update()", touchPoint.x + " " + touchPoint.y);
-            Gdx.app.log("Toggle sound", " " + Settings.TOGGLE_SOUND);
+
         }
 
         Assets.titleFont.getData().setScale(2,2);
@@ -111,6 +119,7 @@ public class LeaderboardScreen extends ScreenAdapter {
 
         game.batcher.begin();
         game.batcher.draw(Assets.backgroundRegion, -Settings.GAME_WIDTH / 2, -Settings.GAME_HEIGHT / 2, 800, 480);
+        game.batcher.draw(Assets.backButton, backBounds.getX(), backBounds.getY(), backBounds.getWidth(), backBounds.getHeight());
         game.batcher.end();
         game.batcher.enableBlending();
 
