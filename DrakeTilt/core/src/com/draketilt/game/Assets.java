@@ -27,6 +27,7 @@ public class Assets {
     public static Texture helpScreen2;
     public static Texture helpScreen3;
     public static Texture helpScreen4;
+    public static Texture helpScreen5;
     public static Texture backButton;
     public static BitmapFont font;
     public static BitmapFont titleFont;
@@ -47,6 +48,7 @@ public class Assets {
         helpScreen2 = loadTexture("helpScreen2.jpg");
         helpScreen3 = loadTexture("helpScreen3.jpg");
         helpScreen4 = loadTexture("helpScreen4.jpg");
+        helpScreen5 = loadTexture("helpScreen5.jpg");
         backgroundRegion = new TextureRegion(background, 0, 0, 800, 480);
         mainMenuBackgroundRegion = new TextureRegion(mainMenuBackground, 0, 0, 800, 480);
 
