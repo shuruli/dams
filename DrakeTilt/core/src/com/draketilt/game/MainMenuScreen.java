@@ -91,7 +91,11 @@ public class MainMenuScreen extends ScreenAdapter{
 
         game.batcher.begin();
         game.batcher.draw(Assets.mainMenuBackgroundRegion, -Settings.GAME_WIDTH/2, -Settings.GAME_HEIGHT/2, 800, 480);
-        game.batcher.draw(Assets.sound, initSoundX, initSoundY, initSoundWidth, initSoundHeight);
+        if (Settings.TOGGLE_SOUND) {
+            game.batcher.draw(Assets.sound, initSoundX, initSoundY, initSoundWidth, initSoundHeight);
+        } else{
+            game.batcher.draw(Assets.mute, initSoundX, initSoundY, initSoundWidth, initSoundHeight);
+        }
 
         Assets.font.setColor(Color.BLACK);
         Assets.font.draw(game.batcher, Settings.PLAY, initX, initY + 3*heightPerLabel);

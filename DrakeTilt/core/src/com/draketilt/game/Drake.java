@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 public class Drake extends DynamicGameObject {
     public static final float DRAKE_MOVE_VELOCITY = 150;
     public static final float DRAKE_WIDTH = Assets.drakeAlive.getWidth() - (Assets.drakeAlive.getWidth()/4);
-    public static final float DRAKE_HEIGHT = Assets.drakeAlive.getHeight();
+    public static final float DRAKE_HEIGHT = Assets.drakeAlive.getHeight() - (Assets.drakeAlive.getHeight()/4);
     public static final int DRAKE_ALIVE = 0;
     public static final int DRAKE_DEAD = 1;
 

@@ -14,6 +14,7 @@ public class HelpScreen extends ScreenAdapter {
     static final int SCREEN_2 = 1;
     static final int SCREEN_3 = 2;
     static final int SCREEN_4 = 3;
+    static final int SCREEN_5 = 4;
     int state;
 
     DrakeTilt game;
@@ -43,6 +44,9 @@ public class HelpScreen extends ScreenAdapter {
                     state = SCREEN_4;
                     break;
                 case SCREEN_4:
+                    state = SCREEN_5;
+                    break;
+                case SCREEN_5:
                     game.setScreen(new MainMenuScreen(game));
                     Gdx.input.setCatchBackKey(false);
                     return;
@@ -78,6 +82,12 @@ public class HelpScreen extends ScreenAdapter {
             case SCREEN_4:
                 game.batcher.begin();
                 game.batcher.draw(Assets.helpScreen4, -Settings.GAME_WIDTH/2,
+                        -Settings.GAME_HEIGHT/2, Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
+                game.batcher.end();
+                break;
+            case SCREEN_5:
+                game.batcher.begin();
+                game.batcher.draw(Assets.helpScreen5, -Settings.GAME_WIDTH/2,
                         -Settings.GAME_HEIGHT/2, Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
                 game.batcher.end();
                 break;

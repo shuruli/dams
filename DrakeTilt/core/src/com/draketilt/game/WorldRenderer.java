@@ -57,7 +57,15 @@ public class WorldRenderer {
     public void renderDrops(){
         for(int i = 0; i < world.drops.size(); i++){
             Drops drop = world.drops.get(i);
-            batch.draw(Assets.drop, drop.position.x, drop.position.y);
+            if (drop.type == Drops.DISS_TRACK) {
+                batch.draw(Assets.drop, drop.position.x, drop.position.y);
+            }
+            else if (drop.type == Drops.RIHANNA_TRACK) {
+                batch.draw(Assets.rihanna, drop.position.x, drop.position.y);
+            }
+            else if (drop.type == Drops.SIX_TRACK) {
+                batch.draw(Assets.six, drop.position.x, drop.position.y);
+            }
         }
     }
 
