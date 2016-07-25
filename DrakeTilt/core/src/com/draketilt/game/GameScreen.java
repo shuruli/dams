@@ -147,10 +147,11 @@ public class GameScreen extends ScreenAdapter {
 
             String jsonText = preferences.getString("highScores");
             highScores = json.fromJson(HighScores.class, jsonText);
-            listScores = highScores.scores;
 
             if (highScores != null && highScores.scores != null && highScores.scores.size() != 0) {
-                if (highScores.scores.get(highScores.scores.size() - 1).score != 0){
+                if (highScores.scores.get(highScores.scores.size() - 1).score > this.score){
+                    listScores = highScores.scores;
+                } else if (highScores.scores.get(highScores.scores.size() - 1).score != 0){
                     for (int i = 0; i < highScores.scores.size(); i++) {
                         if (score > highScores.scores.get(i).score) {
                             listScores = shiftList(scoreObject, highScores.scores, i, highScores.scores.size() - 1);
