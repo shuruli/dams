@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void update (float deltaTime){
-        score = world.score;
+        score = world.score / 5;
         if (Settings.TOGGLE_SOUND) {
             Assets.onedance.play();
         }
