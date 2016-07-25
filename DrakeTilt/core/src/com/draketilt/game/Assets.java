@@ -35,6 +35,8 @@ public class Assets {
     public static Music hotlinebling;
     public static Music onedance;
     public static Music backtoback;
+    public static Music knowyourself;
+    public static Music riri;
 
 
     public static Texture loadTexture(String file){
@@ -70,6 +72,10 @@ public class Assets {
         onedance.setLooping(true);
         backtoback = Gdx.audio.newMusic(Gdx.files.internal("backtoback.mp3"));
         backtoback.setLooping(false);
+        knowyourself = Gdx.audio.newMusic(Gdx.files.internal("knowyourself.mp3"));
+        knowyourself.setLooping(false);
+        riri = Gdx.audio.newMusic(Gdx.files.internal("riri.mp3"));
+        riri.setLooping(false);
         if (Settings.TOGGLE_SOUND) { hotlinebling.play(); }
     }
 

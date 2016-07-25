@@ -89,6 +89,7 @@ public class World {
                 else if (drop.type == Drops.RIHANNA_TRACK){
                     drops.remove(drop);
                     score += 1000;
+                    Assets.riri.play();
                 }
                 else if (drop.type == Drops.SIX_TRACK){
                     for (int j = 0; j < drops.size(); j++){
@@ -98,6 +99,7 @@ public class World {
                     state = WORLD_GAME_SLOW;
                     slow_time = 0f;
                     drops.remove(drop);
+                    Assets.knowyourself.play();
                 }
             }
         }
