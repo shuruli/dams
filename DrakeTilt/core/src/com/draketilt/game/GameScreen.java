@@ -147,6 +147,7 @@ public class GameScreen extends ScreenAdapter {
 
             String jsonText = preferences.getString("highScores");
             highScores = json.fromJson(HighScores.class, jsonText);
+            listScores = highScores.scores;
 
             if (highScores != null && highScores.scores != null && highScores.scores.size() != 0) {
                 if (highScores.scores.get(highScores.scores.size() - 1).score != 0){
